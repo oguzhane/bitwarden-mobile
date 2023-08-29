@@ -2626,6 +2626,24 @@ Chcete se přepnout na tento účet?</value>
   <data name="CurrentMasterPassword" xml:space="preserve">
     <value>Aktuální hlavní heslo</value>
   </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Přihlášeno!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Schválit s mým dalším zařízením</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Žádost o schválení správcem</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Schválit hlavním heslem</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Vypnout pomocí veřejného zařízení</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Zapamatovat toto zařízení</value>
+  </data>
   <data name="Passkey" xml:space="preserve">
     <value>Přístupový klíč</value>
   </data>
@@ -2658,13 +2676,31 @@ Chcete se přepnout na tento účet?</value>
     <value>Nápověda pro znovuzeptání se na hlavní heslo</value>
   </data>
   <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
-    <value>Odemknutí může selhat z důvodu nedostatku paměti. Pro vyřešení snižte nastavení paměti KDF.</value>
+    <value>Unlocking may fail due to insufficient memory. Decrease your KDF memory settings or set up biometric unlock to resolve.</value>
   </data>
   <data name="InvalidAPIKey" xml:space="preserve">
     <value>Neplatný klíč API</value>
   </data>
   <data name="InvalidAPIToken" xml:space="preserve">
     <value>Neplatný token API</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Bylo vyžádáno schválení správcem</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Váš požadavek byl odeslán Vašemu správci.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Po schválení budete upozorněni. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Potíže s přihlášením?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Přihlášování jako {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Akce časového limitu trezoru byla změněna na odhlášení</value>
   </data>
   <data name="ThisItemCannotBeSharedWithTheOrganizationBecauseThereIsOneAlreadyWithTheSamePasskey" xml:space="preserve">
     <value>Tuto položku nelze sdílet s organizací, protože již existuje jedna se stejným přístupovým klíčem.</value>
@@ -2711,5 +2747,17 @@ Chcete se přepnout na tento účet?</value>
   </data>
   <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
     <value>Najednou nelze upravovat více URI</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Přihlášení bylo schváleno</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Přihlášení zařízením musí být nastaveno v aplikaci Bitwarden. Potřebujete další volby?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Přihlásit se zařízením</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Přihlašování na</value>
   </data>
 </root>

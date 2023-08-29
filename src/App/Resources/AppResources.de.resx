@@ -598,7 +598,7 @@
     <value>Weitere Einstellungen</value>
   </data>
   <data name="MustLogInMainApp" xml:space="preserve">
-    <value>Du musst dich in der Bitwarden App einloggen, bevor du die Erweiterung benutzen kannst.</value>
+    <value>Du musst dich in der Bitwarden App anmelden, bevor du die Erweiterung benutzen kannst.</value>
   </data>
   <data name="Never" xml:space="preserve">
     <value>Niemals</value>
@@ -838,7 +838,7 @@
     <comment>For 2FA</comment>
   </data>
   <data name="RememberMe" xml:space="preserve">
-    <value>Eingeloggt bleiben</value>
+    <value>Angemeldet bleiben</value>
     <comment>Remember my two-step login</comment>
   </data>
   <data name="SendVerificationCodeAgain" xml:space="preserve">
@@ -1292,7 +1292,7 @@ Das Scannen erfolgt automatisch.</value>
     <value>Auto-Ausfüllen aktiviert!</value>
   </data>
   <data name="MustLogInMainAppAutofill" xml:space="preserve">
-    <value>Du musst dich in der Bitwarden App einloggen, bevor du AutoFill nutzen kannst.</value>
+    <value>Du musst dich in der Bitwarden App anmelden, bevor du AutoFill nutzen kannst.</value>
   </data>
   <data name="AutofillSetup" xml:space="preserve">
     <value>Du kannst nun direkt von der Tastatur auf deine Zugangsdaten zugreifen, wenn du dich auf Webseiten oder in Apps anmeldest.</value>
@@ -2626,6 +2626,24 @@ Möchtest du zu diesem Konto wechseln?</value>
   <data name="CurrentMasterPassword" xml:space="preserve">
     <value>Aktuelles Master-Passwort</value>
   </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Angemeldet!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Mit meinem anderen Gerät genehmigen</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Admin-Genehmigung anfordern</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Mit Master-Passwort genehmigen</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Mit einem öffentlichen Gerät ausschalten</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Dieses Gerät merken</value>
+  </data>
   <data name="Passkey" xml:space="preserve">
     <value>Passkey</value>
   </data>
@@ -2658,13 +2676,31 @@ Möchtest du zu diesem Konto wechseln?</value>
     <value>Hilfe zum erneuten Abfragen des Master-Passworts</value>
   </data>
   <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
-    <value>Das Entsperren kann aufgrund von unzureichendem Arbeitsspeicher fehlschlagen. Verringere deine KDF-Speichereinstellungen, um das Problem zu beheben.</value>
+    <value>Unlocking may fail due to insufficient memory. Decrease your KDF memory settings or set up biometric unlock to resolve.</value>
   </data>
   <data name="InvalidAPIKey" xml:space="preserve">
     <value>Ungültiger API-Schlüssel</value>
   </data>
   <data name="InvalidAPIToken" xml:space="preserve">
     <value>Ungültiger API-Token</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Admin-Genehmigung angefordert</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Deine Anfrage wurde an deinen Administrator gesendet.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Du wirst benachrichtigt, sobald sie genehmigt wurde.</value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Probleme beim Einloggen?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Anmelden als {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Vault timeout action changed to log out</value>
   </data>
   <data name="ThisItemCannotBeSharedWithTheOrganizationBecauseThereIsOneAlreadyWithTheSamePasskey" xml:space="preserve">
     <value>Dieser Eintrag kann nicht mit der Organisation geteilt werden, da bereits einer mit dem gleichen Passkey existiert.</value>
@@ -2711,5 +2747,17 @@ Möchtest du zu diesem Konto wechseln?</value>
   </data>
   <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
     <value>Es können nicht mehrere URIs auf einmal bearbeitet werden</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Login genehmigt</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Die Anmeldung über ein Gerät muss in den Einstellungen der Bitwarden App eingerichtet werden. Benötigst du eine andere Option?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Mit Gerät anmelden</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Anmelden bei</value>
   </data>
 </root>

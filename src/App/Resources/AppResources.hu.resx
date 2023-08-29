@@ -2626,6 +2626,24 @@ Szeretnénk átváltani erre a fiókra?</value>
   <data name="CurrentMasterPassword" xml:space="preserve">
     <value>Jelenlegi mesterjelszó</value>
   </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Megtörtént a bejelentkezés.</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Jóváhagyás másik eszközzel</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Adminisztrátori jóváhagyás kérés</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Jóváhagyás mesterjelszóval</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Kikapcsolás nyilvános eszközzel</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Eszköz megjegyzése</value>
+  </data>
   <data name="Passkey" xml:space="preserve">
     <value>Hozzáférési kulcs</value>
   </data>
@@ -2658,13 +2676,31 @@ Szeretnénk átváltani erre a fiókra?</value>
     <value>Mesterjelszó újbóli bekérés súgó</value>
   </data>
   <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
-    <value>A feloldás meghiúsulhat, mert nincs elegendő memória. A megoldáshoz csökkentsül a KDF memóriabeállításait.</value>
+    <value>Unlocking may fail due to insufficient memory. Decrease your KDF memory settings or set up biometric unlock to resolve.</value>
   </data>
   <data name="InvalidAPIKey" xml:space="preserve">
     <value>Érvénytelen API kulcs</value>
   </data>
   <data name="InvalidAPIToken" xml:space="preserve">
     <value>Érvénytelen API vezérjel</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Adminisztrátori jóváhagyás kérés történt</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>A kérés elküldésre került az adminisztrátornak.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>A jóváhagyás után értesítés érkezik.</value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Probléma van a bejelentkezéssel?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Bejelentkezés mint {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>A széf időkifutási művelete kijelentkezésre módosult.</value>
   </data>
   <data name="ThisItemCannotBeSharedWithTheOrganizationBecauseThereIsOneAlreadyWithTheSamePasskey" xml:space="preserve">
     <value>Ez az elem nem osztható meg a szervezettel, mert már van egy ugyanezzel a hozzáférési kulccsal.</value>
@@ -2711,5 +2747,17 @@ Szeretnénk átváltani erre a fiókra?</value>
   </data>
   <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
     <value>Nem szerkeszthető több URI egyszerre.</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>A bejelentkezés jóváhagyásra került.</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Az eszközzel történő bejelentkezést be kell állítani a Bitwarden alkalmazás beállításaiban. Más opcióra van szükség?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Bejelentkezés eszközzel</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Bejelentkezés:</value>
   </data>
 </root>

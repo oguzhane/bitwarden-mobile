@@ -2627,6 +2627,24 @@
   <data name="CurrentMasterPassword" xml:space="preserve">
     <value>Поточний головний пароль</value>
   </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Ви увійшли!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Затвердити з моїм іншим пристроєм</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Запит підтвердження адміністратора</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Затвердити з головним паролем</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Вимкнути використання загальнодоступного пристрою</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Запам'ятати цей пристрій</value>
+  </data>
   <data name="Passkey" xml:space="preserve">
     <value>Ключ доступу</value>
   </data>
@@ -2659,13 +2677,31 @@
     <value>Допомога щодо повторного запиту головного пароля</value>
   </data>
   <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
-    <value>Розблокування може не працювати через брак пам'яті. Зменште значення KDF у налаштуваннях, щоб розв'язати проблему.</value>
+    <value>Розблокування може не працювати через брак пам'яті. Зменште значення пам'яті KDF або налаштуйте біометричне розблокування, щоб розв'язати проблему.</value>
   </data>
   <data name="InvalidAPIKey" xml:space="preserve">
     <value>Недійсний ключ API</value>
   </data>
   <data name="InvalidAPIToken" xml:space="preserve">
     <value>Недійсний токен API</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Запитано затвердження адміністратором</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Ваш запит відправлено адміністратору.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Ви отримаєте сповіщення після затвердження. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Проблема під час входу?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>Вхід у систему як {0}</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Час очікування сховища змінено на вихід</value>
   </data>
   <data name="ThisItemCannotBeSharedWithTheOrganizationBecauseThereIsOneAlreadyWithTheSamePasskey" xml:space="preserve">
     <value>Цей запис не можна поширити для організації, оскільки там вже є запис із таким самим ключем доступу.</value>
@@ -2712,5 +2748,17 @@
   </data>
   <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
     <value>Неможливо редагувати кілька URI одночасно</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Вхід затверджено</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Потрібно увімкнути схвалення запитів на вхід у налаштуваннях програми Bitwarden. Потрібен інший варіант?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Увійти з пристроєм</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Увійти на</value>
   </data>
 </root>

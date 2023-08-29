@@ -2626,6 +2626,24 @@ Bu hesaba keçmək istəyirsiniz?</value>
   <data name="CurrentMasterPassword" xml:space="preserve">
     <value>Hazırkı ana parol</value>
   </data>
+  <data name="LoggedIn" xml:space="preserve">
+    <value>Giriş edildi!</value>
+  </data>
+  <data name="ApproveWithMyOtherDevice" xml:space="preserve">
+    <value>Digər cihazımla təsdiqlə</value>
+  </data>
+  <data name="RequestAdminApproval" xml:space="preserve">
+    <value>Admin təsdiqini tələb et</value>
+  </data>
+  <data name="ApproveWithMasterPassword" xml:space="preserve">
+    <value>Ana parolla təsdiqlə</value>
+  </data>
+  <data name="TurnOffUsingPublicDevice" xml:space="preserve">
+    <value>Hər kəsə açıq bir cihaz istifadə edərək söndür</value>
+  </data>
+  <data name="RememberThisDevice" xml:space="preserve">
+    <value>Bu cihazı xatırla</value>
+  </data>
   <data name="Passkey" xml:space="preserve">
     <value>Passkey</value>
   </data>
@@ -2658,13 +2676,31 @@ Bu hesaba keçmək istəyirsiniz?</value>
     <value>Ana parolu təkrar soruş köməyi</value>
   </data>
   <data name="UnlockingMayFailDueToInsufficientMemoryDecreaseYourKDFMemorySettingsToResolve" xml:space="preserve">
-    <value>Yetərsiz yaddaşa görə kilid açma uğursuz ola bilər. Həll etmək üçün KDF yaddaş tənzimləmələrinizi azaldın</value>
+    <value>Unlocking may fail due to insufficient memory. Decrease your KDF memory settings or set up biometric unlock to resolve.</value>
   </data>
   <data name="InvalidAPIKey" xml:space="preserve">
     <value>Yararsız API açarı</value>
   </data>
   <data name="InvalidAPIToken" xml:space="preserve">
     <value>Yararsız API tokeni</value>
+  </data>
+  <data name="AdminApprovalRequested" xml:space="preserve">
+    <value>Admin təsdiqi tələb olunur</value>
+  </data>
+  <data name="YourRequestHasBeenSentToYourAdmin" xml:space="preserve">
+    <value>Tələbiniz admininizə göndərildi.</value>
+  </data>
+  <data name="YouWillBeNotifiedOnceApproved" xml:space="preserve">
+    <value>Təsdiqləndikdən sonra məlumatlandırılacaqsınız. </value>
+  </data>
+  <data name="TroubleLoggingIn" xml:space="preserve">
+    <value>Girişdə problem var?</value>
+  </data>
+  <data name="LoggingInAsX" xml:space="preserve">
+    <value>{0} olaraq giriş edilir</value>
+  </data>
+  <data name="VaultTimeoutActionChangedToLogOut" xml:space="preserve">
+    <value>Anbar vaxt bitməsi əməliyyatı "çıxış et" olaraq dəyişdirildi</value>
   </data>
   <data name="ThisItemCannotBeSharedWithTheOrganizationBecauseThereIsOneAlreadyWithTheSamePasskey" xml:space="preserve">
     <value>This item cannot be shared with the organization because there is one already with the same passkey.</value>
@@ -2711,5 +2747,17 @@ Bu hesaba keçmək istəyirsiniz?</value>
   </data>
   <data name="CannotEditMultipleURIsAtOnce" xml:space="preserve">
     <value>Bir dəfəyə bir neçə URI-a düzəliş etmək mümkün deyil</value>
+  </data>
+  <data name="LoginApproved" xml:space="preserve">
+    <value>Giriş təsdiqləndi</value>
+  </data>
+  <data name="LogInWithDeviceMustBeSetUpInTheSettingsOfTheBitwardenAppNeedAnotherOption" xml:space="preserve">
+    <value>Cihazla giriş etmə, Bitwarden tətbiqinin tənzimləmələrində quraşdırılmalıdır. Başqa bir seçimə ehtiyacınız var?</value>
+  </data>
+  <data name="LogInWithDevice" xml:space="preserve">
+    <value>Cihazla giriş et</value>
+  </data>
+  <data name="LoggingInOn" xml:space="preserve">
+    <value>Giriş edilir</value>
   </data>
 </root>
