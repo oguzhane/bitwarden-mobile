@@ -99,7 +99,7 @@ namespace Bit.Core.Services
                 EventsUrl = envUrls.Events = urls.Events;
 
                 _apiService.SetUrls(envUrls);
-                
+
                 _conditionedAwaiterManager.SetAsCompleted(AwaiterPrecondition.EnvironmentUrlsInited);
             }
             catch (System.Exception ex)
@@ -147,7 +147,6 @@ namespace Bit.Core.Services
         public async Task SetClientCertificate(string certUri)
         {
             var certSpec = await _certificateService.GetCertificateAsync(certUri);
-            
             await _storageService.SaveAsync(Constants.ClientAuthCertificateUriKey, certUri);
             _apiService.UseClientCertificate(certSpec);
             ClientCertUri = certUri;
@@ -179,7 +178,7 @@ namespace Bit.Core.Services
             return url.Trim();
         }
 
-        public async Task RemoveExistingClientCert() 
+        public async Task RemoveExistingClientCert()
         {
             var existingCertUri = await GetClientCertificateUriFromStorageAsync();
             if (existingCertUri != null)

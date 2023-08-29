@@ -78,7 +78,7 @@ namespace Bit.App.Pages
             }
         }
 
-        
+
         public Action SubmitSuccessAction { get; set; }
         public Action CloseAction { get; set; }
 
@@ -108,7 +108,7 @@ namespace Bit.App.Pages
             IdentityUrl = resUrls.Identity;
             IconsUrl = resUrls.Icons;
             NotificationsUrls = resUrls.Notifications;
-            
+
             await ApplyCertChanges();
 
             SubmitSuccessAction?.Invoke();
