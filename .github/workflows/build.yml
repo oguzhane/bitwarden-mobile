@@ -251,7 +251,7 @@ jobs:
 
           msbuild "$($env:GITHUB_WORKSPACE + "/src/Android/Android.csproj")" `
             "/t:SignAndroidPackage" "/p:Configuration=FDroid" "/p:AndroidKeyStore=true" `
-            "/p:AndroidSigningKeyAlias=bitwarden" "/p:AndroidSigningKeyPass=$($env:FDROID_KEY_PASSWORD)" `
+            "/p:AndroidSigningKeyAlias=nibblewarden" "/p:AndroidSigningKeyPass=$($env:FDROID_KEY_PASSWORD)" `
             "/p:AndroidSigningKeyStore=$("app_fdroid-keystore.jks")" `
             "/p:AndroidSigningStorePass=$($env:FDROID_KEYSTORE_PASSWORD)" "/v:quiet"
 
