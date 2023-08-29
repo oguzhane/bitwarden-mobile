@@ -210,7 +210,7 @@ jobs:
         shell: pwsh
 
       - name: Run Core tests
-        run: dotnet test test/Core.Test/Core.Test.csproj --logger "trx;LogFileName=test-results.trx"
+        run: dotnet test test/Core.Test/Core.Test.csproj --logger "trx;LogFileName=test-results.trx" -c FDroid
         shell: pwsh
 
       - name: Report test results
