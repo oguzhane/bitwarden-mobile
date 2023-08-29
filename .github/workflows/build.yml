@@ -284,7 +284,6 @@ jobs:
     runs-on: ubuntu-20.04
     needs:
       - cloc
-      - android
       - f-droid
     steps:
       - name: Check if any job failed
@@ -294,12 +293,9 @@ jobs:
           || (github.ref == 'refs/heads/hotfix-rc')
         env:
           CLOC_STATUS: ${{ needs.cloc.result }}
-          ANDROID_STATUS: ${{ needs.android.result }}
           F_DROID_STATUS: ${{ needs.f-droid.result }}
         run: |
           if [ "$CLOC_STATUS" = "failure" ]; then
-              exit 1
-          elif [ "$ANDROID_STATUS" = "failure" ]; then
               exit 1
           elif [ "$F_DROID_STATUS" = "failure" ]; then
               exit 1
