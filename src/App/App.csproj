@@ -445,5 +445,4 @@
     <None Remove="Utilities\Automation\" />
     <None Remove="Utilities\Prompts\" />
   </ItemGroup>
-
 </Project>
