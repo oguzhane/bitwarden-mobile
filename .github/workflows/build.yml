@@ -58,206 +58,6 @@ jobs:
           fi
         shell: bash
 
-
-  android:
-    name: Android
-    runs-on: windows-2022
-    needs: setup
-    strategy:
-      fail-fast: false
-      matrix:
-        variant: ["prod"]
-    steps:
-      - name: Setup NuGet
-        uses: nuget/setup-nuget@296fd3ccf8528660c91106efefe2364482f86d6f # v1.2.0
-        with:
-          nuget-version: 5.9.0
-
-      - name: Set up .NET
-        uses: actions/setup-dotnet@3447fd6a9f9e57506b15f895c5b76d3b197dc7c2 # v3.2.0
-        with:
-          dotnet-version: '3.1.x'
-
-      - name: Set up MSBuild
-        uses: microsoft/setup-msbuild@1ff57057b5cfdc39105cd07a01d78e9b0ea0c14c # v1.3.1
-
-      - name: Setup Windows builder
-        run: choco install checksum --no-progress
-
-      - name: Work Around for broken Windows 2022 Runner Image
-        run: |
-          Set-Location "C:\Program Files (x86)\Microsoft Visual Studio\Installer\"
-          $InstallPath = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
-          $componentsToAdd = @(
-            "Component.Xamarin"
-          )
-          [string]$workloadArgs = $componentsToAdd | ForEach-Object {" --add " +  $_}
-          $Arguments = ('/c', "vs_installer.exe", 'modify', '--installPath', "`"$InstallPath`"",$workloadArgs, '--quiet', '--norestart', '--nocache')
-          $process = Start-Process -FilePath cmd.exe -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden
-          if ($process.ExitCode -eq 0)
-          {
-              Write-Host "components have been successfully added"
-          }
-          else
-          {
-              Write-Host "components were not installed"
-              exit 1
-          }
-      - name: Print environment
-        run: |
-          nuget help | grep Version
-          msbuild -version
-          dotnet --info
-          echo "GitHub ref: $GITHUB_REF"
-          echo "GitHub event: $GITHUB_EVENT"
-
-      - name: Checkout repo
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-        with:
-          fetch-depth: 0
-      - name: Decrypt secrets
-        env:
-          DECRYPT_FILE_PASSWORD: ${{ secrets.DECRYPT_FILE_PASSWORD }}
-        run: |
-          mkdir -p ~/secrets
-
-          gpg --quiet --batch --yes --decrypt --passphrase="$DECRYPT_FILE_PASSWORD" \
-            --output ./src/Android/app_play-keystore.jks ./.github/secrets/app_play-keystore.jks.gpg
-        shell: bash
-      - name: Decrypt secrets - Google Services
-        if: ${{ matrix.variant == 'prod' }}
-        env:
-          DECRYPT_FILE_PASSWORD: ${{ secrets.DECRYPT_FILE_PASSWORD }}
-        run: |
-          gpg --quiet --batch --yes --decrypt --passphrase="$DECRYPT_FILE_PASSWORD" \
-            --output ./src/Android/google-services.json ./.github/secrets/google-services.json.gpg
-        shell: bash
-      - name: Increment version
-        run: |
-          BUILD_NUMBER=$((3000 + $GITHUB_RUN_NUMBER))
-
-          echo "########################################"
-          echo "##### Setting Version Code $BUILD_NUMBER"
-          echo "########################################"
-
-          sed -i "s/android:versionCode=\"1\"/android:versionCode=\"$BUILD_NUMBER\"/" \
-            ./src/Android/Properties/AndroidManifest.xml
-        shell: bash
-
-      - name: Restore packages
-        run: nuget restore
-
-      - name: Restore tools
-        run: dotnet tool restore
-        shell: pwsh
-
-      - name: Verify Format
-        run: dotnet tool run dotnet-format --check
-        shell: pwsh
-
-      - name: Run Core tests
-        run: dotnet test test/Core.Test/Core.Test.csproj --logger "trx;LogFileName=test-results.trx"
-        shell: pwsh
-
-      - name: Report test results
-        uses: dorny/test-reporter@c9b3d0e2bd2a4e96aaf424dbaa31c46b42318226 # v1.6.0
-        if: always()
-        with:
-          name: Test Results
-          path: "**/test-results.trx"
-          reporter: dotnet-trx
-          fail-on-error: true
-
-      - name: Setup Android build  (${{ matrix.variant }})
-        run: dotnet cake build.cake --target Android --variant ${{ matrix.variant }}
-
-      - name: Build Android
-        run: |
-          $configuration = "Release";
-
-          Write-Output "########################################"
-          Write-Output "##### Build $configuration Configuration"
-          Write-Output "########################################"
-          msbuild "$($env:GITHUB_WORKSPACE + "/src/Android/Android.csproj")" "/p:Configuration=$configuration"
-
-        shell: pwsh
-
-      - name: Sign Android Build
-        env:
-          PLAY_KEYSTORE_PASSWORD: ${{ secrets.PLAY_KEYSTORE_PASSWORD }}
-        run: |
-          $androidPath = $($env:GITHUB_WORKSPACE + "/src/Android/Android.csproj");
-          $packageName = "com.x8bit.bitwarden";
-
-          if ("${{ matrix.variant }}" -ne "prod")
-          {
-            $packageName = "com.x8bit.bitwarden.${{ matrix.variant }}";
-          }
-
-          Write-Output "########################################"
-          Write-Output "##### Sign APK Release Configuration"
-          Write-Output "########################################"
-
-          msbuild "$($androidPath)" "/t:SignAndroidPackage" "/p:Configuration=Release" "/p:AndroidKeyStore=true" `
-              "/p:AndroidSigningKeyAlias=bitwarden" "/p:AndroidSigningKeyPass=$($env:PLAY_KEYSTORE_PASSWORD)" `
-              "/p:AndroidSigningKeyStore=$("app_play-keystore.jks")" `
-              "/p:AndroidSigningStorePass=$($env:PLAY_KEYSTORE_PASSWORD)" "/v:quiet"
-
-          Write-Output "########################################"
-          Write-Output "##### Copy Release APK to project root"
-          Write-Output "########################################"
-
-          $signedApkPath = $($env:GITHUB_WORKSPACE + "/src/Android/bin/Release/$($packageName)-Signed.apk");
-          $signedApkDestPath = $($env:GITHUB_WORKSPACE + "/$($packageName).apk");
-
-          Copy-Item $signedApkPath $signedApkDestPath
-        shell: pwsh
-
-      - name: Upload Prod .apk artifact
-        if: ${{ matrix.variant == 'prod' }}
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # v3.0.0
-        with:
-          name: com.x8bit.bitwarden.apk
-          path: ./com.x8bit.bitwarden.apk
-          if-no-files-found: error
-
-      - name: Upload Other .apk artifact
-        if: ${{ matrix.variant != 'prod' }}
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # v3.0.0
-        with:
-          name: com.x8bit.bitwarden.${{ matrix.variant }}.apk
-          path: ./com.x8bit.bitwarden.${{ matrix.variant }}.apk
-          if-no-files-found: error
-
-      - name: Create checksum for Prod .apk artifact
-        if: ${{ matrix.variant == 'prod' }}
-        run: |
-          checksum -f="./com.x8bit.bitwarden.apk" `
-            -t sha256 | Out-File -Encoding ASCII ./bw-android-apk-sha256.txt
-
-      - name: Create checksum for Other .apk artifact
-        if: ${{ matrix.variant != 'prod' }}
-        run: |
-          checksum -f="./com.x8bit.bitwarden.${{ matrix.variant }}.apk" `
-            -t sha256 | Out-File -Encoding ASCII ./bw-android-${{ matrix.variant }}-apk-sha256.txt
-
-      - name: Upload .apk sha file for prod
-        if: ${{ matrix.variant == 'prod' }}
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # v3.0.0
-        with:
-          name: bw-android-apk-sha256.txt
-          path: ./bw-android-apk-sha256.txt
-          if-no-files-found: error
-
-      - name: Upload .apk sha file for other
-        if: ${{ matrix.variant != 'prod' }}
-        uses: actions/upload-artifact@6673cd052c4cd6fcf4b4e6e60ea986c889389535 # v3.0.0
-        with:
-          name: bw-android-${{ matrix.variant }}-apk-sha256.txt
-          path: ./bw-android-${{ matrix.variant }}-apk-sha256.txt
-          if-no-files-found: error
-
-
   f-droid:
     name: F-Droid Build
     runs-on: windows-2022
@@ -400,6 +200,27 @@ jobs:
 
       - name: Restore packages
         run: nuget restore
+
+      - name: Restore tools
+        run: dotnet tool restore
+        shell: pwsh
+
+      - name: Verify Format
+        run: dotnet tool run dotnet-format --check
+        shell: pwsh
+
+      - name: Run Core tests
+        run: dotnet test test/Core.Test/Core.Test.csproj --logger "trx;LogFileName=test-results.trx"
+        shell: pwsh
+
+      - name: Report test results
+        uses: dorny/test-reporter@c9b3d0e2bd2a4e96aaf424dbaa31c46b42318226 # v1.6.0
+        if: always()
+        with:
+          name: Test Results
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
 
       - name: Build for F-Droid
         run: |
