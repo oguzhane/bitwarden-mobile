@@ -4,7 +4,7 @@ permissions:
 
 on:
   schedule:
-    - cron:  '53 6 * * 1,4'
+    - cron:  '53 6 * * 4'
     # scheduled at 07:00 every Monday and Thursday
 
   workflow_dispatch:  # click the button on Github repo!
