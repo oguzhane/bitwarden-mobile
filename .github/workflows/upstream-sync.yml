@@ -2,7 +2,7 @@ name: 'Upstream Sync'
 
 on:
   schedule:
-    - cron:  '0 7 * * 1,4'
+    - cron:  '53 6 * * 1,4'
     # scheduled at 07:00 every Monday and Thursday
 
   workflow_dispatch:  # click the button on Github repo!
@@ -33,8 +33,8 @@ jobs:
         target_sync_branch: main
         # REQUIRED 'target_repo_token' exactly like this!
         target_repo_token: ${{ secrets.GITHUB_TOKEN }}
-        upstream_sync_branch: main
-        upstream_sync_repo: aormsby/Fork-Sync-With-Upstream-action
+        upstream_sync_branch: master
+        upstream_sync_repo: bitwarden/mobile
 
         # Set test_mode true to run tests instead of the true action!!
         test_mode: false
