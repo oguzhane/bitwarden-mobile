@@ -2,6 +2,8 @@
 name: Build
 
 on:
+  schedule:
+    - cron: '48 9 * * 1,4'
   pull_request:
     branches:
       - "main"
