@@ -1,4 +1,6 @@
 name: 'Upstream Sync'
+permissions:
+  contents: write
 
 on:
   schedule:
