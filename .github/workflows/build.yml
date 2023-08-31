@@ -241,19 +241,15 @@ jobs:
         shell: pwsh
 
       - name: Sign for F-Droid
-        env:
-          FDROID_KEYSTORE_PASSWORD: ${{ secrets.FDROID_KEYSTORE_PASSWORD }}
-          FDROID_KEY_PASSWORD: ${{ secrets.FDROID_KEY_PASSWORD }}
         run: |
+          echo "::add-mask::${{ secrets.FDROID_KEYSTORE_PASSWORD }}"
+          echo "::add-mask::${{ secrets.FDROID_KEY_PASSWORD }}"
+    
           Write-Output "########################################"
           Write-Output "##### Sign FDroid Configuration"
           Write-Output "########################################"
-
-          msbuild "$($env:GITHUB_WORKSPACE + "/src/Android/Android.csproj")" `
-            "/t:SignAndroidPackage" "/p:Configuration=FDroid" "/p:AndroidKeyStore=true" `
-            "/p:AndroidSigningKeyAlias=nibblewarden" "/p:AndroidSigningKeyPass=$($env:FDROID_KEY_PASSWORD)" `
-            "/p:AndroidSigningKeyStore=$("app_fdroid-keystore.jks")" `
-            "/p:AndroidSigningStorePass=$($env:FDROID_KEYSTORE_PASSWORD)" "/v:detailed"
+          
+          msbuild /t:SignAndroidPackage /p:Configuration=FDroid /p:AndroidPackageFormat=apk /p:AndroidKeyStore=true /p:AndroidSigningKeyAlias=nibblewarden "/p:AndroidSigningKeyPass=${{ secrets.FDROID_KEY_PASSWORD }}" /p:AndroidSigningKeyStore=app_fdroid-keystore.jks "/p:AndroidSigningStorePass=${{ secrets.FDROID_KEYSTORE_PASSWORD }}" "$($env:GITHUB_WORKSPACE + "/src/Android/Android.csproj")" "/v:quiet"
 
           Write-Output "########################################"
           Write-Output "##### Copy FDroid apk to project root"
