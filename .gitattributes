@@ -63,3 +63,5 @@
 #*.RTF   diff=astextplain
 
 /.github/* merge=ours
+
+.github/workflows/build.yml merge=ours
