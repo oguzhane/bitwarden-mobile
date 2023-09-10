@@ -62,4 +62,4 @@
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
 
-/.github/** merge=ours
+/.github/* merge=ours
