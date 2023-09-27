@@ -244,6 +244,14 @@ namespace Bit.App.Pages
 
                 await _deviceActionService.HideLoadingAsync();
 
+                if (response.RequiresEncryptionKeyMigration)
+                {
+                    // Legacy users must migrate on web vault.
+                    await _platformUtilsService.ShowDialogAsync(AppResources.EncryptionKeyMigrationRequiredDescriptionLong, AppResources.AnErrorHasOccurred,
+                        AppResources.Ok);
+                    return;
+                }
+
                 if (response.TwoFactor)
                 {
                     StartTwoFactorAction?.Invoke();
