@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Bit.App.Resources;
 using Bit.Core.Abstractions;
-using Bit.Core.Models.Data;
+using Bit.Core.Enums;
 using Bit.Core.Utilities;
 using Xamarin.CommunityToolkit.ObjectModel;
 
@@ -27,8 +27,20 @@ namespace Bit.App.Pages
             _certificateService = ServiceContainer.Resolve<ICertificateService>("certificateService");
 
             PageTitle = AppResources.Settings;
-            BaseUrl = _environmentService.BaseUrl == EnvironmentUrlData.DefaultEU.Base || EnvironmentUrlData.DefaultUS.Base == _environmentService.BaseUrl ?
-                string.Empty : _environmentService.BaseUrl;
+            SubmitCommand = new AsyncCommand(SubmitAsync, onException: ex => OnSubmitException(ex), allowsMultipleExecutions: false);
+            Init();
+        }
+
+        public void Init()
+        {
+            if (_environmentService.SelectedRegion != Region.SelfHosted ||
+                _environmentService.BaseUrl == Region.US.BaseUrl() ||
+                _environmentService.BaseUrl == Region.EU.BaseUrl())
+            {
+                return;
+            }
+
+            BaseUrl = _environmentService.BaseUrl;
             WebVaultUrl = _environmentService.WebVaultUrl;
             ApiUrl = _environmentService.ApiUrl;
             IdentityUrl = _environmentService.IdentityUrl;
@@ -90,8 +102,7 @@ namespace Bit.App.Pages
                 await Page.DisplayAlert(AppResources.AnErrorHasOccurred, AppResources.EnvironmentPageUrlsError, AppResources.Ok);
                 return;
             }
-
-            var resUrls = await _environmentService.SetUrlsAsync(new Core.Models.Data.EnvironmentUrlData
+            var urls = new Core.Models.Data.EnvironmentUrlData
             {
                 Base = BaseUrl,
                 Api = ApiUrl,
@@ -99,7 +110,8 @@ namespace Bit.App.Pages
                 WebVault = WebVaultUrl,
                 Icons = IconsUrl,
                 Notifications = NotificationsUrls
-            });
+            };
+            var resUrls = await _environmentService.SetRegionAsync(urls.Region, urls);
 
             // re-set urls since service can change them, ex: prefixing https://
             BaseUrl = resUrls.Base;

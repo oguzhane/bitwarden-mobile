@@ -51,6 +51,7 @@ namespace Bit.Core.Models.View
         public DateTime CreationDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public CipherRepromptType Reprompt { get; set; }
+        public CipherKey Key { get; set; }
 
         public ItemView Item
         {
@@ -120,6 +121,6 @@ namespace Bit.Core.Models.View
 
         public bool IsClonable => OrganizationId is null;
 
-        public bool HasFido2Key => Type == CipherType.Login && Login?.HasFido2Keys == true;
+        public bool HasFido2Credential => Type == CipherType.Login && Login?.HasFido2Credentials == true;
     }
 }

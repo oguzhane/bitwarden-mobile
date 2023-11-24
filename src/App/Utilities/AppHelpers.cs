@@ -25,6 +25,9 @@ namespace Bit.App.Utilities
 {
     public static class AppHelpers
     {
+        public const string VAULT_TIMEOUT_ACTION_CHANGED_MESSAGE_COMMAND = "vaultTimeoutActionChanged";
+        public const string RESUMED_MESSAGE_COMMAND = "resumed";
+
         public static async Task<string> CipherListOptions(ContentPage page, CipherView cipher, IPasswordRepromptService passwordRepromptService)
         {
             var platformUtilsService = ServiceContainer.Resolve<IPlatformUtilsService>("platformUtilsService");
@@ -402,14 +405,15 @@ namespace Bit.App.Utilities
                         var settingValue = string.IsNullOrWhiteSpace(setting.Value) ? null : setting.Value;
                         if (environmentService.BaseUrl != settingValue)
                         {
-                            await environmentService.SetUrlsAsync(new Core.Models.Data.EnvironmentUrlData
+                            var urls = new EnvironmentUrlData
                             {
                                 Base = settingValue,
                                 Api = environmentService.ApiUrl,
                                 Identity = environmentService.IdentityUrl,
                                 WebVault = environmentService.WebVaultUrl,
                                 Icons = environmentService.IconsUrl
-                            });
+                            };
+                            await environmentService.SetRegionAsync(urls.Region, urls);
                         }
                         return;
                     default:

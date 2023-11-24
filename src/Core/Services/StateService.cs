@@ -695,16 +695,19 @@ namespace Bit.Core.Services
             await SetValueAsync(Constants.LastBuildKey, value, await GetDefaultStorageOptionsAsync());
         }
 
+        // TODO: [PS-961] Fix negative function names
         public async Task<bool?> GetDisableFaviconAsync()
         {
             return await GetValueAsync<bool?>(Constants.DisableFaviconKey, await GetDefaultStorageOptionsAsync());
         }
 
+        // TODO: [PS-961] Fix negative function names
         public async Task SetDisableFaviconAsync(bool? value)
         {
             await SetValueAsync(Constants.DisableFaviconKey, value, await GetDefaultStorageOptionsAsync());
         }
 
+        // TODO: [PS-961] Fix negative function names
         public async Task<bool?> GetDisableAutoTotpCopyAsync(string userId = null)
         {
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
@@ -713,6 +716,7 @@ namespace Bit.Core.Services
                 reconciledOptions);
         }
 
+        // TODO: [PS-961] Fix negative function names
         public async Task SetDisableAutoTotpCopyAsync(bool? value, string userId = null)
         {
             var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
@@ -1359,6 +1363,30 @@ namespace Bit.Core.Services
             _storageMediatorService.Save(Constants.ConfigsKey, value);
         }
 
+        public async Task SetUserHasMasterPasswordAsync(bool value, string userId = null)
+        {
+            var reconciledOptions = ReconcileOptions(new StorageOptions { UserId = userId },
+                await GetDefaultStorageOptionsAsync());
+            var account = await GetAccountAsync(reconciledOptions);
+            account.Profile.UserDecryptionOptions.HasMasterPassword = value;
+            await SaveAccountAsync(account, reconciledOptions);
+        }
+
+        public async Task<Region?> GetActiveUserRegionAsync()
+        {
+            return await GetActiveUserCustomDataAsync(a => a?.Settings?.Region);
+        }
+
+        public async Task<Region?> GetPreAuthRegionAsync()
+        {
+            return await _storageMediatorService.GetAsync<Region?>(Constants.RegionEnvironment);
+        }
+
+        public async Task SetPreAuthRegionAsync(Region value)
+        {
+            await _storageMediatorService.SaveAsync(Constants.RegionEnvironment, value);
+        }
+
         // Helpers
 
         [Obsolete("Use IStorageMediatorService instead")]
@@ -1548,6 +1576,7 @@ namespace Bit.Core.Services
             await CheckStateAsync();
 
             account.Settings.EnvironmentUrls = await GetPreAuthEnvironmentUrlsAsync();
+            account.Settings.Region = await GetPreAuthRegionAsync();
 
             // Storage
             var state = await GetStateFromStorageAsync() ?? new State();

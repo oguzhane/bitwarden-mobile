@@ -11,7 +11,7 @@ using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Exceptions;
 using Bit.Core.Models;
-using Bit.Core.Models.Domain;
+using Bit.Core.Models.Data;
 using Bit.Core.Models.Request;
 using Bit.Core.Models.Response;
 using Bit.Core.Utilities;
@@ -57,8 +57,7 @@ namespace Bit.Core.Services
             var device = (int)_platformUtilsService.GetDevice();
             _httpClient.DefaultRequestHeaders.Add("Device-Type", device.ToString());
             _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Name", _platformUtilsService.GetClientType().GetString());
-            _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Version", _platformUtilsService.GetApplicationVersion());
-
+            _httpClient.DefaultRequestHeaders.Add("Bitwarden-Client-Version", VersionHelpers.RemoveSuffix(_platformUtilsService.GetApplicationVersion()));
             if (!string.IsNullOrWhiteSpace(customUserAgent))
             {
                 _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(customUserAgent);
@@ -75,7 +74,7 @@ namespace Bit.Core.Services
         public string IdentityBaseUrl { get; set; }
         public string EventsBaseUrl { get; set; }
 
-        public void SetUrls(EnvironmentUrls urls)
+        public void SetUrls(EnvironmentUrlData urls)
         {
             UrlsSet = true;
             if (!string.IsNullOrWhiteSpace(urls.Base))

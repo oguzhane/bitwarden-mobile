@@ -91,7 +91,7 @@ namespace Bit.App
                             _messagingService.Send("showDialogResolve", new Tuple<int, bool>(details.DialogId, confirmed));
                         });
                     }
-                    else if (message.Command == "resumed")
+                    else if (message.Command == AppHelpers.RESUMED_MESSAGE_COMMAND)
                     {
                         if (Device.RuntimePlatform == Device.iOS)
                         {
@@ -170,6 +170,11 @@ namespace Bit.App
                             await Application.Current.MainPage.Navigation.PushModalAsync(
                                 new NavigationPage(new UpdateTempPasswordPage()));
                         });
+                    }
+                    else if (message.Command == Constants.ForceSetPassword)
+                    {
+                        await Device.InvokeOnMainThreadAsync(() => Application.Current.MainPage.Navigation.PushModalAsync(
+                                new NavigationPage(new SetPasswordPage(orgIdentifier: (string)message.Data))));
                     }
                     else if (message.Command == "syncCompleted")
                     {
@@ -365,7 +370,7 @@ namespace Bit.App
             await Device.InvokeOnMainThreadAsync(() =>
             {
                 ThemeManager.SetTheme(Current.Resources);
-                _messagingService.Send("updatedTheme");
+                _messagingService.Send(ThemeManager.UPDATED_THEME_MESSAGE_KEY);
             });
         }
 
