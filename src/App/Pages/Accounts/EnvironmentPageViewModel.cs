@@ -57,10 +57,10 @@ namespace Bit.App.Pages
             BindCertDetailsAsync().FireAndForget();
         }
 
-        public ICommand SubmitCommand { get; }
-        public ICommand ImportCertCommand { get; }
-        public ICommand UseSystemCertCommand { get; }
-        public ICommand RemoveCertCommand { get; }
+        public ICommand SubmitCommand { get; set; }
+        public ICommand ImportCertCommand { get; set; }
+        public ICommand UseSystemCertCommand { get; set; }
+        public ICommand RemoveCertCommand { get; set; }
 
         public string BaseUrl { get; set; }
         public string ApiUrl { get; set; }
