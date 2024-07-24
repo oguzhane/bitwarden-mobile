@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Bit.Core.Abstractions
+﻿namespace Bit.Core.Abstractions
 {
-    public interface IFileService
+    public partial interface IFileService
     {
         bool CanOpenFile(string fileName);
         bool OpenFile(byte[] fileData, string id, string fileName);

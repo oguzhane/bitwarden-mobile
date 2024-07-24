@@ -2,7 +2,7 @@
 
 namespace Bit.Core
 {
-    public static class Constants
+    public static partial class Constants
     {
         public const int MaxAccounts = 5;
         public const int VaultTimeoutDefault = 15;

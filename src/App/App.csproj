@@ -114,7 +114,6 @@
 	  <Folder Include="Platforms\Android\Autofill\" />
 	  <Folder Include="Platforms\Android\Push\" />
 	  <Folder Include="Platforms\Android\Receivers\" />
-	  <Folder Include="Platforms\Android\Services\" />
 	  <Folder Include="Platforms\Android\Tiles\" />
 	  <Folder Include="Platforms\Android\Utilities\" />
 	  <Folder Include="Platforms\Android\Resources\drawable-xxxhdpi\" />

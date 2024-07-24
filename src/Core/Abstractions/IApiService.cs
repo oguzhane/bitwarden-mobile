@@ -6,7 +6,7 @@ using DeviceType = Bit.Core.Enums.DeviceType;
 
 namespace Bit.Core.Abstractions
 {
-    public interface IApiService
+    public partial interface IApiService
     {
         string ApiBaseUrl { get; set; }
         string IdentityBaseUrl { get; set; }

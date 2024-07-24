@@ -3,7 +3,7 @@ using BwRegion = Bit.Core.Enums.Region;
 
 namespace Bit.Core.Abstractions
 {
-    public interface IEnvironmentService
+    public partial interface IEnvironmentService
     {
         string ApiUrl { get; set; }
         string BaseUrl { get; set; }
