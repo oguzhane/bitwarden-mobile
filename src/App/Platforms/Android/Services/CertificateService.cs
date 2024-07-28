@@ -13,6 +13,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Bit.Droid.Services
 {
+    // Tag:Nibblewarden
     public class CertificateService : ICertificateService
     {
         private const string DefaultClientCertAlias = "ClientCertificate";
@@ -197,7 +198,7 @@ namespace Bit.Droid.Services
             var result = new TaskCompletionSource<string>();
             try
             {
-                Device.BeginInvokeOnMainThread(() =>
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
                     try
                     {
@@ -218,7 +219,6 @@ namespace Bit.Droid.Services
                     {
                         result.SetException(ex);
                     }
-
                 });
             }
             catch (Exception ex)

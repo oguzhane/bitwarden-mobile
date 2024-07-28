@@ -6,27 +6,26 @@ using BwRegion = Bit.Core.Enums.Region;
 
 namespace Bit.App.Pages
 {
+    // Tag:Nibblewarden
     public partial class EnvironmentPageViewModel : BaseViewModel
     {
         private ICertificateService _certificateService;
 
         private string _certificateAlias = "";
-        private string _certificateUri = "";
+        private string _certificateUri = null;
         private string _certificateDetails = "";
         private bool _certificateHasChanged;
 
         private void NibbleCtor()
         {
             _certificateService = ServiceContainer.Resolve<ICertificateService>("certificateService");
+            ImportCertCommand = CreateDefaultAsyncRelayCommand(ImportCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
+            UseSystemCertCommand = CreateDefaultAsyncRelayCommand(UseSystemCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
+            RemoveCertCommand = CreateDefaultAsyncRelayCommand(RemoveCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
         }
 
         private void NibbleInit()
         {
-            //SubmitCommand = CreateDefaultAsyncRelayCommand(SubmitAsync, onException: OnSubmitException, allowsMultipleExecutions: false);
-            ImportCertCommand = CreateDefaultAsyncRelayCommand(ImportCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
-            UseSystemCertCommand = CreateDefaultAsyncRelayCommand(UseSystemCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
-            RemoveCertCommand = CreateDefaultAsyncRelayCommand(RemoveCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
-
             _certificateUri = _environmentService.ClientCertUri;
             BindCertDetailsAsync().FireAndForget();
         }
