@@ -1,8 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Runtime.MonoAOTCompiler.Task" Version="8.0.*" />
-	</ItemGroup>
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 
@@ -47,7 +44,7 @@
     <AndroidEnableMultiDex>True</AndroidEnableMultiDex>
     <UseInterpreter>False</UseInterpreter>
     <DebugSymbols>False</DebugSymbols>
-    <RunAOTCompilation>False</RunAOTCompilation>
+    <RunAOTCompilation>true</RunAOTCompilation>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
