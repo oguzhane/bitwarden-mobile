@@ -15,6 +15,11 @@ on:
   workflow_dispatch:
     inputs: {}
 
+env:
+  main_app_folder_path: src/App
+  main_app_project_path: src/App/App.csproj
+  target-net-version: net8.0
+
 jobs:
   cloc:
     name: CLOC
