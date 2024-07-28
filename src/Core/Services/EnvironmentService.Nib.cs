@@ -27,7 +27,7 @@ namespace Bit.Core.Services
             }
             catch
             {
-                return string.Empty;
+                return null;
             }
         }
 

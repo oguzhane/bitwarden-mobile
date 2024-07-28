@@ -72,6 +72,16 @@ namespace Bit.Core.Services
         {
             try
             {
+                #region Nibblewarden
+                ClientCertUri = await GetClientCertificateUriFromStorageAsync();
+                
+                if (ClientCertUri != null)
+                {
+                    var certSpec = await _certificateService.GetCertificateAsync(ClientCertUri);
+                    _apiService.UseClientCertificate(certSpec);
+                } 
+                #endregion
+
                 var region = await _stateService.GetActiveUserRegionAsync();
                 var urls = await _stateService.GetEnvironmentUrlsAsync();
                 urls ??= await _stateService.GetPreAuthEnvironmentUrlsAsync();

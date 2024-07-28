@@ -12,7 +12,7 @@ namespace Bit.App.Pages
         private ICertificateService _certificateService;
 
         private string _certificateAlias = "";
-        private string _certificateUri = null;
+        private string _certificateUri = "";
         private string _certificateDetails = "";
         private bool _certificateHasChanged;
 
@@ -22,10 +22,6 @@ namespace Bit.App.Pages
             ImportCertCommand = CreateDefaultAsyncRelayCommand(ImportCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
             UseSystemCertCommand = CreateDefaultAsyncRelayCommand(UseSystemCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
             RemoveCertCommand = CreateDefaultAsyncRelayCommand(RemoveCertAsync, onException: OnCertCommandException, allowsMultipleExecutions: false);
-        }
-
-        private void NibbleInit()
-        {
             _certificateUri = _environmentService.ClientCertUri;
             BindCertDetailsAsync().FireAndForget();
         }

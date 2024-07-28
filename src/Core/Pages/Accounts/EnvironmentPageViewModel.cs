@@ -38,9 +38,6 @@ namespace Bit.App.Pages
             IdentityUrl = _environmentService.IdentityUrl;
             IconsUrl = _environmentService.IconsUrl;
             NotificationsUrls = _environmentService.NotificationsUrl;
-            #region Nibblewarden
-            NibbleInit();
-            #endregion
         }
 
         public ICommand SubmitCommand { get; }
