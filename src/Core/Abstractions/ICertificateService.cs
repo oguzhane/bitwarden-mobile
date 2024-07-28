@@ -2,6 +2,7 @@
 
 namespace Bit.Core.Abstractions
 {
+    // Tag:Nibblewarden
     public interface ICertificateService
     {
         bool TryRemoveCertificate(string certUri);

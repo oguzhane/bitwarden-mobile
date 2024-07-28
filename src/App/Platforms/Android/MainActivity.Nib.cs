@@ -4,6 +4,7 @@ using AndroidX.Activity.Result;
 
 namespace Bit.Droid
 {
+    // Tag:Nibblewarden
     public partial class MainActivity : MauiAppCompatActivity
     {
         private string stamp = "";

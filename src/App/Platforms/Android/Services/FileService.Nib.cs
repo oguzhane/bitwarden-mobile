@@ -7,6 +7,7 @@ using Bit.Core.Resources.Localization;
 
 namespace Bit.Droid.Services
 {
+    // Tag:Nibblewarden
     public partial class FileService: IFileService
     {
         public Task<T> SelectFileAsync<T>() where T : class

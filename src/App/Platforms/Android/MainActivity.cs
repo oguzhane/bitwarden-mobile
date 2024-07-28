@@ -53,7 +53,9 @@ namespace Bit.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            stamp = DateTime.UtcNow.ToString();
+            #region Nibblewarden
+            stamp = DateTime.UtcNow.ToString(); 
+            #endregion
 
             var eventUploadIntent = new Intent(this, typeof(EventUploadReceiver));
             _eventUploadPendingIntent = PendingIntent.GetBroadcast(this, 0, eventUploadIntent,
@@ -243,6 +245,7 @@ namespace Bit.Droid
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
+            #region Nibblewarden
             if (_oneTimeActivityListeners.ContainsKey(requestCode))
             {
                 if (_oneTimeActivityListeners.TryRemove(requestCode, out var listener))
@@ -250,7 +253,8 @@ namespace Bit.Droid
                     listener.SetResult(new ActivityResult((int)resultCode, data));
                 }
                 return;
-            }
+            } 
+            #endregion
 
             if (resultCode == Result.Ok &&
                (requestCode == Core.Constants.SelectFileRequestCode || requestCode == Core.Constants.SaveFileRequestCode))

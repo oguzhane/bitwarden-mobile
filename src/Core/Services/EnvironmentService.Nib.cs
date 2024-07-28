@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bit.Core.Abstractions;
+﻿using Bit.Core.Abstractions;
 
 namespace Bit.Core.Services
 {
+    // Tag:Nibblewarden
     public partial class EnvironmentService: IEnvironmentService
     {
         public string ClientCertUri { get; set; }

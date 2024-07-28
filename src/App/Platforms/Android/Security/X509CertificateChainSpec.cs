@@ -1,11 +1,11 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using Bit.Core.Models;
 using Java.Security;
 using Java.Security.Cert;
 
 namespace Bit.Droid.Security
 {
+    // Tag:Nibblewarden
     public class X509CertificateChainSpec : ICertificateChainSpec<Java.Security.Cert.X509Certificate, IKey>
     {
         public string Alias { get; set; }

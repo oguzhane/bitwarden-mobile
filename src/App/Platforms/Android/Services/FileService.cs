@@ -169,6 +169,7 @@ namespace Bit.Droid.Services
 
         public Task SelectFileAsync()
         {
+            #region Nibblewarden(modified)
             var activity = (MainActivity)Platform.CurrentActivity;
 
             var chooserIntent = CreateFileChooserIntent();
@@ -178,7 +179,8 @@ namespace Bit.Droid.Services
             }
 
             activity.StartActivityForResult(chooserIntent, Core.Constants.SelectFileRequestCode);
-            return Task.FromResult(0);
+            return Task.FromResult(0); 
+            #endregion
         }
 
         private bool DeleteDir(Java.IO.File dir)
