@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Bit.Core.Abstractions;
 using Bit.Core.Enums;
 using Bit.Core.Exceptions;
+using Bit.Core.Models;
 using Bit.Core.Models.Data;
 using Bit.Core.Models.Request;
 using Bit.Core.Models.Response;
@@ -26,7 +27,8 @@ namespace Bit.Core.Services
         {
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
-        private readonly HttpClient _httpClient = new HttpClient();
+
+        private readonly HttpClient _httpClient;
         private readonly ITokenService _tokenService;
         private readonly IPlatformUtilsService _platformUtilsService;
         private readonly Func<Tuple<string, bool, bool>, Task> _logoutCallbackAsync;
@@ -37,6 +39,11 @@ namespace Bit.Core.Services
             Func<Tuple<string, bool, bool>, Task> logoutCallbackAsync,
             string customUserAgent = null)
         {
+            #region Nibblewarden
+            _httpClientHandler = ServiceContainer.Resolve<IHttpClientHandler>("httpClientHandler");
+            _httpClient = new HttpClient(_httpClientHandler.AsClientHandler());
+            #endregion
+
             _tokenService = tokenService;
             _platformUtilsService = platformUtilsService;
             _logoutCallbackAsync = logoutCallbackAsync;
@@ -54,6 +61,14 @@ namespace Bit.Core.Services
         public string ApiBaseUrl { get; set; }
         public string IdentityBaseUrl { get; set; }
         public string EventsBaseUrl { get; set; }
+
+        #region Nibblewarden
+        private readonly IHttpClientHandler _httpClientHandler;
+        public void UseClientCertificate(ICertificateChainSpec certificateChainSpec)
+        {
+            _httpClientHandler.UseClientCertificate(certificateChainSpec);
+        }
+        #endregion
 
         public void SetUrls(EnvironmentUrlData urls)
         {

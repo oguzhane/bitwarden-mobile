@@ -5,7 +5,7 @@ using BwRegion = Bit.Core.Enums.Region;
 
 namespace Bit.Core.Services
 {
-    public class EnvironmentService : IEnvironmentService
+    public partial class EnvironmentService : IEnvironmentService
     {
         private const string DEFAULT_WEB_VAULT_URL = "https://vault.bitwarden.com";
         private const string DEFAULT_WEB_SEND_URL = "https://send.bitwarden.com/#";
@@ -13,6 +13,8 @@ namespace Bit.Core.Services
         private readonly IApiService _apiService;
         private readonly IStateService _stateService;
         private readonly IConditionedAwaiterManager _conditionedAwaiterManager;
+        private readonly IStorageService _storageService;
+        private readonly ICertificateService _certificateService;
 
         public EnvironmentService(
             IApiService apiService,
@@ -22,6 +24,8 @@ namespace Bit.Core.Services
             _apiService = apiService;
             _stateService = stateService;
             _conditionedAwaiterManager = conditionedAwaiterManager;
+            _storageService = ServiceContainer.Resolve<IStorageService>("storageService");
+            _certificateService = ServiceContainer.Resolve<ICertificateService>("certificateService");
         }
 
         public string BaseUrl { get; set; }
@@ -68,6 +72,16 @@ namespace Bit.Core.Services
         {
             try
             {
+                #region Nibblewarden
+                ClientCertUri = await GetClientCertificateUriFromStorageAsync();
+                
+                if (ClientCertUri != null)
+                {
+                    var certSpec = await _certificateService.GetCertificateAsync(ClientCertUri);
+                    _apiService.UseClientCertificate(certSpec);
+                } 
+                #endregion
+
                 var region = await _stateService.GetActiveUserRegionAsync();
                 var urls = await _stateService.GetEnvironmentUrlsAsync();
                 urls ??= await _stateService.GetPreAuthEnvironmentUrlsAsync();

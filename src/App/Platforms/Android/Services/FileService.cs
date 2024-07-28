@@ -17,7 +17,7 @@ using FileProvider = AndroidX.Core.Content.FileProvider;
 
 namespace Bit.Droid.Services
 {
-    public class FileService : IFileService
+    public partial class FileService : IFileService
     {
         private readonly IStateService _stateService;
         private readonly IBroadcasterService _broadcasterService;
@@ -169,52 +169,18 @@ namespace Bit.Droid.Services
 
         public Task SelectFileAsync()
         {
-            var activity = (MainActivity)Microsoft.Maui.ApplicationModel.Platform.CurrentActivity;
-            var hasStorageWritePermission = !_cameraPermissionsDenied &&
-                HasPermission(Manifest.Permission.WriteExternalStorage);
-            var additionalIntents = new List<IParcelable>();
-            if (activity.PackageManager.HasSystemFeature(PackageManager.FeatureCamera))
+            #region Nibblewarden(modified)
+            var activity = (MainActivity)Platform.CurrentActivity;
+
+            var chooserIntent = CreateFileChooserIntent();
+            if (chooserIntent == null)
             {
-                var hasCameraPermission = !_cameraPermissionsDenied && HasPermission(Manifest.Permission.Camera);
-                if (!_cameraPermissionsDenied && !hasStorageWritePermission)
-                {
-                    AskPermission(Manifest.Permission.WriteExternalStorage);
-                    return Task.FromResult(0);
-                }
-                if (!_cameraPermissionsDenied && !hasCameraPermission)
-                {
-                    AskPermission(Manifest.Permission.Camera);
-                    return Task.FromResult(0);
-                }
-                if (!_cameraPermissionsDenied && hasCameraPermission && hasStorageWritePermission)
-                {
-                    try
-                    {
-                        var tmpDir = new Java.IO.File(activity.FilesDir, Constants.TEMP_CAMERA_IMAGE_DIR);
-                        var file = new Java.IO.File(tmpDir, Constants.TEMP_CAMERA_IMAGE_NAME);
-                        if (!file.Exists())
-                        {
-                            file.ParentFile.Mkdirs();
-                            file.CreateNewFile();
-                        }
-                        var outputFileUri = FileProvider.GetUriForFile(activity,
-                            "com.x8bit.bitwarden.fileprovider", file);
-                        additionalIntents.AddRange(GetCameraIntents(outputFileUri));
-                    }
-                    catch (Java.IO.IOException) { }
-                }
+                return Task.FromResult(0);
             }
 
-            var docIntent = new Intent(Intent.ActionOpenDocument);
-            docIntent.AddCategory(Intent.CategoryOpenable);
-            docIntent.SetType("*/*");
-            var chooserIntent = Intent.CreateChooser(docIntent, AppResources.FileSource);
-            if (additionalIntents.Count > 0)
-            {
-                chooserIntent.PutExtra(Intent.ExtraInitialIntents, additionalIntents.ToArray());
-            }
             activity.StartActivityForResult(chooserIntent, Core.Constants.SelectFileRequestCode);
-            return Task.FromResult(0);
+            return Task.FromResult(0); 
+            #endregion
         }
 
         private bool DeleteDir(Java.IO.File dir)

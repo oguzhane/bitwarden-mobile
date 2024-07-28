@@ -23,6 +23,8 @@ using Bit.App.Controls;
 using Bit.App.Platforms.Android.Autofill;
 using Bit.Core.Enums;
 using Bit.Core.Services.UserVerification;
+using Bit.Droid.Security;
+
 
 #if !FDROID
 using Android.Gms.Security;
@@ -237,6 +239,11 @@ namespace Bit.Droid
             ServiceContainer.Register<ICryptoService>("cryptoService", cryptoService);
             ServiceContainer.Register<IPasswordRepromptService>("passwordRepromptService", passwordRepromptService);
             ServiceContainer.Register<IAvatarImageSourcePool>("avatarImageSourcePool", new AvatarImageSourcePool());
+
+            #region Nibblewarden
+            ServiceContainer.Register<ICertificateService>("certificateService", new CertificateService());
+            ServiceContainer.Register<IHttpClientHandler>("httpClientHandler", new AndroidHttpsClientHandler());
+            #endregion
 
             // Push
 #if FDROID

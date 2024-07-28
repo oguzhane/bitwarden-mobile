@@ -6,7 +6,7 @@ using BwRegion = Bit.Core.Enums.Region;
 
 namespace Bit.App.Pages
 {
-    public class EnvironmentPageViewModel : BaseViewModel
+    public partial class EnvironmentPageViewModel : BaseViewModel
     {
         private readonly IEnvironmentService _environmentService;
         readonly LazyResolve<ILogger> _logger = new LazyResolve<ILogger>("logger");
@@ -17,6 +17,9 @@ namespace Bit.App.Pages
 
             PageTitle = AppResources.Settings;
             SubmitCommand = CreateDefaultAsyncRelayCommand(SubmitAsync, onException: OnSubmitException, allowsMultipleExecutions: false);
+            #region Nibblewarden
+            NibbleCtor();
+            #endregion
             Init();
         }
 
@@ -72,6 +75,10 @@ namespace Bit.App.Pages
             IdentityUrl = resUrls.Identity;
             IconsUrl = resUrls.Icons;
             NotificationsUrls = resUrls.Notifications;
+
+            #region Nibblewarden
+            await ApplyCertChanges();
+            #endregion
 
             if (SubmitSuccessTask != null)
             {

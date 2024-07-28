@@ -25,6 +25,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using FileProvider = AndroidX.Core.Content.FileProvider;
 using Bit.Core.Utilities.Fido2;
+using AndroidX.Activity.Result;
 
 namespace Bit.Droid
 {
@@ -33,7 +34,7 @@ namespace Bit.Droid
     // LaunchMode defined in values/manifest.xml for Android 10- and values-v30/manifest.xml for Android 11+
     // See https://github.com/bitwarden/mobile/pull/1673 for details
     [Register("com.x8bit.bitwarden.MainActivity")]
-    public class MainActivity : MauiAppCompatActivity
+    public partial class MainActivity : MauiAppCompatActivity
     {
         private IDeviceActionService _deviceActionService;
         private IFileService _fileService;        
@@ -52,6 +53,10 @@ namespace Bit.Droid
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            #region Nibblewarden
+            stamp = DateTime.UtcNow.ToString(); 
+            #endregion
+
             var eventUploadIntent = new Intent(this, typeof(EventUploadReceiver));
             _eventUploadPendingIntent = PendingIntent.GetBroadcast(this, 0, eventUploadIntent,
                 AndroidHelpers.AddPendingIntentMutabilityFlag(PendingIntentFlags.UpdateCurrent, false));
@@ -240,6 +245,17 @@ namespace Bit.Droid
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
+            #region Nibblewarden
+            if (_oneTimeActivityListeners.ContainsKey(requestCode))
+            {
+                if (_oneTimeActivityListeners.TryRemove(requestCode, out var listener))
+                {
+                    listener.SetResult(new ActivityResult((int)resultCode, data));
+                }
+                return;
+            } 
+            #endregion
+
             if (resultCode == Result.Ok &&
                (requestCode == Core.Constants.SelectFileRequestCode || requestCode == Core.Constants.SaveFileRequestCode))
             {
