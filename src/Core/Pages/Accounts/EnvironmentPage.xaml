@@ -100,7 +100,7 @@
                     StyleClass="box-footer-label" />
             </StackLayout>
 
-
+            <!--#region Nibblewarden -->
             <StackLayout StyleClass="box" Margin="0,0,0,40">
                 <StackLayout.Resources>
                     <u:InverseBoolConverter x:Key="inverseBool" />
@@ -160,6 +160,8 @@
                         AutomationId="UseSystemCertButton"
                         />
             </StackLayout>
+            <!--#endregion-->
+
         </StackLayout>
     </ScrollView>
 
