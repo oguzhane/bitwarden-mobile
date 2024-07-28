@@ -109,7 +109,7 @@ jobs:
           mkdir -p ~/secrets
 
           gpg --quiet --batch --yes --decrypt --passphrase="$DECRYPT_FILE_PASSWORD" \
-            --output ./src/Android/app_fdroid-keystore.jks ./.github/secrets/app_fdroid-keystore.jks.gpg
+            --output ${{ env.android_folder_path_bash }}/app_fdroid-keystore.jks ./.github/secrets/app_fdroid-keystore.jks.gpg
         shell: bash
 
       - name: Increment version
