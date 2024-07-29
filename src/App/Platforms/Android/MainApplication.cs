@@ -242,7 +242,7 @@ namespace Bit.Droid
 
             #region Nibblewarden
             ServiceContainer.Register<ICertificateService>("certificateService", new CertificateService());
-            ServiceContainer.Register<IHttpClientHandler>("httpClientHandler", new AndroidHttpsClientHandler());
+            ServiceContainer.Register<IHttpMessageHandler>("httpMessageHandler", new AndroidHttpsClientHandler());
             #endregion
 
             // Push

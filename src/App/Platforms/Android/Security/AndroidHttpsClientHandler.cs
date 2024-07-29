@@ -9,7 +9,7 @@ using Xamarin.Android.Net;
 namespace Bit.Droid.Security
 {
     // Tag:Nibblewarden
-    public class AndroidHttpsClientHandler : AndroidClientHandler, IHttpClientHandler
+    public class AndroidHttpsClientHandler : AndroidMessageHandler, IHttpMessageHandler
     {
         private X509CertificateChainSpec ClientCertificate;
 
@@ -18,7 +18,7 @@ namespace Bit.Droid.Security
             ClientCertificate = null;
         }
 
-        public HttpClientHandler AsClientHandler()
+        public HttpMessageHandler AsMessageHandler()
         {
             return this;
         }
