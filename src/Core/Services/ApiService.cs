@@ -40,8 +40,8 @@ namespace Bit.Core.Services
             string customUserAgent = null)
         {
             #region Nibblewarden
-            _httpClientHandler = ServiceContainer.Resolve<IHttpClientHandler>("httpClientHandler");
-            _httpClient = new HttpClient(_httpClientHandler.AsClientHandler());
+            _httpMessageHandler = ServiceContainer.Resolve<IHttpMessageHandler>("httpMessageHandler");
+            _httpClient = new HttpClient(_httpMessageHandler.AsMessageHandler());
             #endregion
 
             _tokenService = tokenService;
@@ -63,10 +63,10 @@ namespace Bit.Core.Services
         public string EventsBaseUrl { get; set; }
 
         #region Nibblewarden
-        private readonly IHttpClientHandler _httpClientHandler;
+        private readonly IHttpMessageHandler _httpMessageHandler;
         public void UseClientCertificate(ICertificateChainSpec certificateChainSpec)
         {
-            _httpClientHandler.UseClientCertificate(certificateChainSpec);
+            _httpMessageHandler.UseClientCertificate(certificateChainSpec);
         }
         #endregion
 

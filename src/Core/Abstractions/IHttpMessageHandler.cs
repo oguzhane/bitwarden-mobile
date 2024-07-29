@@ -3,9 +3,9 @@
 namespace Bit.Core.Abstractions
 {
     // Tag:Nibblewarden
-    public interface IHttpClientHandler
+    public interface IHttpMessageHandler
     {
-        HttpClientHandler AsClientHandler();
+        HttpMessageHandler AsMessageHandler();
 
         void UseClientCertificate(ICertificateChainSpec clientCertificate);
     }
